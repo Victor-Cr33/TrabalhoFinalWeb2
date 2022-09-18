@@ -12,7 +12,7 @@ class Produto extends Model{
     use SoftDeletes;
 
     protected $table ="produtos";
-    protected $fillable = ['nome', 'preco', 'descricaoPromocao', 'descricaoDesconto', 'data','mercado_id'];
+    protected $fillable = ['nome', 'preco', 'descricaoPromocao', 'descricaoDesconto', 'validade','mercado_id'];
 
     public function mercado(){
 

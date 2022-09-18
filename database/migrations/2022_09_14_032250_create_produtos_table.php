@@ -15,10 +15,18 @@ return new class extends Migration
     {
         Schema::create('produtos', function (Blueprint $table) {
             $table->id();
+            $table->string('nome');
+            $table->float('preco');
+            $table->string('descricaoPromocao');
+            $table->string('descricaoDesconto');
+            $table->dateTime('validade');
+            $table->unsignedBigInteger('mercado_id');
+            $table->foreign('mercado_id')->references('id')->on('mercados');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
-
+  
     /**
      * Reverse the migrations.
      *

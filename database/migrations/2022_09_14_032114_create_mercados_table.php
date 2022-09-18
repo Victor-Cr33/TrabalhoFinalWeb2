@@ -15,7 +15,12 @@ return new class extends Migration
     {
         Schema::create('mercados', function (Blueprint $table) {
             $table->id();
+            $table->string('nome');
+            $table->string('cnpj');
+            $table->string('nomeProprietario');
+            $table->softDeletes();
             $table->timestamps();
+
         });
     }
 

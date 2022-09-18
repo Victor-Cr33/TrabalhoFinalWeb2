@@ -5,7 +5,39 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Mercado;
 
-class MercadoController extends Controller
-{
+class MercadoController extends Controller{
   
+    public function __construct() {
+        $this->middleware("Mid");
+    }
+
+    public function index() {
+       
+        $data = Mercado::all();
+
+        return view('mercados.index', compact['data']);
+    }
+
+    public function create(){
+
+        $mercados = Mercado::all();
+
+        return view('mercados.create', compact('mercados'));
+    }
+
+    public function store(Request $request){
+       
+              $obj_mercado = new Mercado();
+              
+              if(isset($obj_mercado)){
+                  $obj_mercado->nome = $request->nome;
+                  $obj_mercado->cnpj = $request->cnpj;
+                  $obj_mercado->nomeProprietario = $request->nomeProprietario;
+                  $obj_mercado->save();
+              }
+              
+          return redirect()->route('mercados.index');
+      }
+
+            
 }

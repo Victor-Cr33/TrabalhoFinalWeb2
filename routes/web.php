@@ -14,7 +14,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-  
-    return "<h2>Rota Principal</h2>";
+    return view('index');
+})->name('index')->middleware('Mid'); 
 
-});
+Route::get('/mercados', 'MercadoController@index')->middleware('Mid')->name('mercados.index');
+
+Route::get('/produtos', 'ProdutoController@index')->middleware('Mid')->name('produtos.index');
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+require __DIR__.'/auth.php';
