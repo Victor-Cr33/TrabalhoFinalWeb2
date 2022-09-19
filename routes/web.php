@@ -14,15 +14,18 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('index');
-})->name('index')->middleware('Mid'); 
+    return view('welcome');
+})->name('index')->middleware('Mid');
 
 Route::get('/mercados', 'MercadoController@index')->middleware('Mid')->name('mercados.index');
 
-Route::get('/produtos', 'ProdutoController@index')->middleware('Mid')->name('produtos.index');
+Route::resource('produtos', 'ProdutoController');
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('templates.main')->With('titulo', "");
 })->middleware(['auth'])->name('dashboard');
 
+Route::group(['middleware' => ['auth']], function() {
+    Route::get('/logout', 'LogoutController@perform')->name('logout.perform');
+ });
 require __DIR__.'/auth.php';

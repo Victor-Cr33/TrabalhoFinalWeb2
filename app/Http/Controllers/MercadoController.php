@@ -15,14 +15,13 @@ class MercadoController extends Controller{
        
         $data = Mercado::all();
 
-        return view('mercados.index', compact['data']);
+        return view('mercados.index', compact('data'));
     }
 
     public function create(){
 
-        $mercados = Mercado::all();
 
-        return view('mercados.create', compact('mercados'));
+        return view('mercados.create');
     }
 
     public function store(Request $request){

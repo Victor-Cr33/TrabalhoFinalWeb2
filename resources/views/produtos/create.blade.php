@@ -3,98 +3,104 @@
 @section('conteudo')
 
 <form action="{{ route('produtos.store') }}" method="POST" enctype="multipart/form-data">
+    @csrf
     <div class="row">
             <div class="col" >
                 <div class="form-floating mb-3">
-                    <input 
-                        type="text" 
-                        class="form-control {{$errors -> has('nome') ? 'is-invalid' : ''}}" 
-                        name="nome" 
+                    <input
+                        type="text"
+                        class="form-control {{$errors -> has('nome') ? 'is-invalid' : ''}}"
+                        name="nome"
                         placeholder="nome"
                         value="{{old('nome')}}"
                     />
+                    <label for="nome">Nome</label>
                     @if($errors -> has('nome'))
                         <div class='invalid-feedback'>
                             {{ $errors->first('nome') }}
                         </div>
                     @endif
-                    <label for="nome">Nome</label>
+
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col" >
                 <div class="form-floating mb-3">
-                    <input 
-                        type="text" 
-                        class="form-control {{$errors -> has('preco') ? 'is-invalid' : ''}}" 
-                        name="preco" 
+                    <input
+                        type="number"
+                        class="form-control {{$errors -> has('preco') ? 'is-invalid' : ''}}"
+                        name="preco"
                         placeholder="preco"
                         value="{{old('preco')}}"
                     />
+                    <label for="preco">preco</label>
                     @if($errors -> has('preco'))
                         <div class='invalid-feedback'>
                             {{ $errors->first('preco') }}
                         </div>
                     @endif
-                    <label for="preco">preco</label>
+
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col" >
                 <div class="form-floating mb-3">
-                    <input 
-                        type="text" 
-                        class="form-control {{$errors -> has('descricaoPromocao') ? 'is-invalid' : ''}}" 
-                        name="descricaoPromocao" 
+                    <input
+                        type="text"
+                        class="form-control {{$errors -> has('descricaoPromocao') ? 'is-invalid' : ''}}"
+                        name="descricaoPromocao"
                         placeholder="descricaoPromocao"
                         value="{{old('descricaoPromocao')}}"
                     />
+                    <label for="descricaoPromocao">descricao Promocao</label>
                     @if($errors -> has('descricaoPromocao'))
                         <div class='invalid-feedback'>
                             {{ $errors->first('descricaoPromocao') }}
                         </div>
                     @endif
-                    <label for="descricaoPromocao">descricaoPromocao</label>
+
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col" >
                 <div class="form-floating mb-3">
-                    <input 
-                        type="text" 
-                        class="form-control {{$errors -> has('descricaoDesconto') ? 'is-invalid' : ''}}" 
-                        name="descricaoDesconto" 
+                    <input
+                        type="text"
+                        class="form-control {{$errors -> has('descricaoDesconto') ? 'is-invalid' : ''}}"
+                        name="descricaoDesconto"
                         placeholder="descricaoDesconto"
                         value="{{old('descricaoDesconto')}}"
                     />
+                    <label for="descricaoDesconto">descricao Desconto</label>
                     @if($errors -> has('descricaoDesconto'))
                         <div class='invalid-feedback'>
                             {{ $errors->first('descricaoDesconto') }}
                         </div>
                     @endif
-                    <label for="descricaoDesconto">descricaoDesconto</label>
+
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col" >
                 <div class="form-floating mb-3">
-                    <input 
-                        type="date" 
-                        class="form-control {{$errors -> has('validade') ? 'is-invalid' : ''}}" 
-                        name="validade" 
+                    <input
+                        type="datetime-local"
+                        class="form-control {{$errors -> has('validade') ? 'is-invalid' : ''}}"
+                        name="validade"
                         placeholder="validade"
                         value="{{old('validade')}}"
                     />
+                    <label for="validade">validade</label>
                     @if($errors -> has('validade'))
                         <div class='invalid-feedback'>
                             {{ $errors->first('validade') }}
                         </div>
                     @endif
-                    <label for="validade">validade</label>
+
                 </div>
             </div>
         </div>
@@ -103,17 +109,22 @@
         <div class="col" >
             <div class="input-group mb-3">
                 <span class="input-group-text bg-success text-white">Mercado</span>
-                <select 
+                <select
                     name="mercado"
                     class="form-select"
-                    class="form-control @if($errors->has('mercados')) is-invalid @endif" 
-                >@foreach ($mercados as $item)
-                            <option value="{{$item->id}}">
-                                {{ $item->mercados }}
-                            </option>
+                    class="form-control @if($errors->has('mercado')) is-invalid @endif"
+                >   @foreach ($mercados as $item)
+                        <option value="{{$item->id}}" @if($item->id == old('mercado')) selected="true" @endif>
+                            {{ $item->nome }}
+                        </option>
                     @endforeach
                 </select>
-              
+                @if($errors->has('mercado'))
+                <div class='invalid-feedback'>
+                    {{ $errors->first('mercado') }}
+                </div>
+            @endif
+
             </div>
         </div>
     </div>
@@ -135,4 +146,5 @@
         </div>
     </div>
 </form>
+
 @endsection

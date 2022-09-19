@@ -16,30 +16,22 @@ class ProdutoController extends Controller{
 
         $mercados = Mercado::all();
         $data = Produto::all();
+
         return view('produtos.index', compact(['data','mercados']));
     }
 
     public function create(){
-       
+
         $mercados = Mercado::all();
-    
+
         return view('produtos.create', compact('mercados'));
     }
 
     public function store(Request $request){
-    
-         Produto::create([
-             'nome' => $request->nome,
-             'preco' => $request->preco,
-             'descricaoPromocao' => $request->descricaoPromocao,
-             'descricaoDesconto' => $request->descricaoDesconto,
-             'validade'=> $request->validade,
-             'mercado_id'=>$request->mercado_id,
-         ]);
- 
+
          $obj_produto = new Produto();
-         $obj_mercado = Mercado::find($request->mercado_id);
- 
+         $obj_mercado = $request->mercado;
+
          if(isset($obj_mercado)){
              $obj_produto->nome = $request->nome;
              $obj_produto->preco = $request->preco;
@@ -51,9 +43,9 @@ class ProdutoController extends Controller{
              return redirect()->route('produtos.index');
          }
          else{
-             return "<h1>ID: $id não encontrado!"; 
-             return redirect()->route('produtos.index');
+             return "<h1>ID: $obj_mercado não encontrado!";
+
          }
      }
-    
+
 }

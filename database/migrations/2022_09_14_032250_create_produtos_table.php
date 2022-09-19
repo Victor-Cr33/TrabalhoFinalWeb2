@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('nome');
             $table->float('preco');
-            $table->string('descricaoPromocao');
-            $table->string('descricaoDesconto');
+            $table->string('descricaoPromocao')->nullable();
+            $table->string('descricaoDesconto')->nullable();
             $table->dateTime('validade');
             $table->unsignedBigInteger('mercado_id');
             $table->foreign('mercado_id')->references('id')->on('mercados');
@@ -26,7 +26,7 @@ return new class extends Migration
             $table->softDeletes();
         });
     }
-  
+
     /**
      * Reverse the migrations.
      *
