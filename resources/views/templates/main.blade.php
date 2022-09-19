@@ -43,7 +43,7 @@
                             <li><a href="{{route('produtos.index')}}" class="dropdown-item">Produtos</a></li>
                         </ul>
                     </li>
-                    <li class="nav-item dropdown ps-2">
+                    <li class="nav-item dropdown ">
                         <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">
                               <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="#4afe09" class="bi bi-person-square" viewBox="0 0 16 16">
                                 <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
