@@ -21,8 +21,13 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'mercado_id',
+        'role_id'
     ];
 
+    public function mercado(){
+        return $this->belongsTo('App\Models\Mercado');
+    }
     /**
      * The attributes that should be hidden for serialization.
      *

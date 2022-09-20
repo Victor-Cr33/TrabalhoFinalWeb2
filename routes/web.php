@@ -15,17 +15,17 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-})->name('index')->middleware('Mid');
-
-Route::get('/mercados', 'MercadoController@index')->middleware('Mid')->name('mercados.index');
-
-Route::resource('produtos', 'ProdutoController');
+})->name('index');
 
 Route::get('/dashboard', function () {
+
     return view('templates.main')->With('titulo', "");
-})->middleware(['auth'])->name('dashboard');
+
+})->middleware(['auth'  ])->name('dashboard');
 
 Route::group(['middleware' => ['auth']], function() {
+    Route::resource('mercados', 'MercadoController');
+    Route::resource('produtos', 'ProdutoController');
     Route::get('/logout', 'LogoutController@perform')->name('logout.perform');
  });
 require __DIR__.'/auth.php';

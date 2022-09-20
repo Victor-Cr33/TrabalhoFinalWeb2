@@ -26,13 +26,20 @@ class AuthenticatedSessionController extends Controller
      * @param  \App\Http\Requests\Auth\LoginRequest  $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(LoginRequest $request)
-    {
+    public function store(LoginRequest $request){
+
         $request->authenticate();
 
-        $request->session()->regenerate();
+        $user = auth()->user();
+        if($user->mercado_id == null){
+            return redirect()->route('mercados.create');
+        }
+        else{
 
-        return redirect()->intended(RouteServiceProvider::HOME);
+            $request->session()->regenerate();
+
+            return redirect()->intended(RouteServiceProvider::HOME);
+        }
     }
 
     /**
